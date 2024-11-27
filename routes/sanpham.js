@@ -4,7 +4,7 @@ const JWT = require('jsonwebtoken');
 const config = require('../util/tokenConfig');
 const Sanpham = require('../models/sanphamModels');
 // Route: Lấy tất cả sản phẩm
-router.get('/', async (req, res) => {
+router.get('/tatcasp', async (req, res) => {
     try {
       const products = await Sanpham.find().populate('category', 'name');  // Lấy tất cả sản phẩm và populate thông tin danh mục
       res.status(200).json(products);  // Trả về danh sách sản phẩm
