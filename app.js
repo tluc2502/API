@@ -9,12 +9,14 @@ const mongoose = require('mongoose');
 require('./models/usermodels');
 require('./models/sinhvienModels');
 require('./models/sanphamModels');
+require('./models/nhanvienmodole');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var SinhVienRouter = require('./routes/SinhVien');
 var mailRouter = require('./routes/mail');
 var SanphamRouter = require('./routes/sanpham');
+var NhanVienRouter = require('./routes/nhanvien');
 var app = express();
 
 // view engine setup
@@ -37,6 +39,8 @@ app.use('/users', usersRouter);
 app.use('/sinhvien', SinhVienRouter);
 app.use('/mail', mailRouter);
 app.use('/sanphams', SanphamRouter);
+app.use('/nhanvien', NhanVienRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
