@@ -8,11 +8,13 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 require('./models/usermodels');
 require('./models/sinhvienModels');
+require('./models/sanphamModels');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var SinhVienRouter = require('./routes/SinhVien');
 var mailRouter = require('./routes/mail');
+var SanphamRouter = require('./routes/sanpham');
 var app = express();
 
 // view engine setup
@@ -34,6 +36,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/sinhvien', SinhVienRouter);
 app.use('/mail', mailRouter);
+app.use('/sanpham', SanphamRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
