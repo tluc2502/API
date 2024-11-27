@@ -38,7 +38,7 @@ router.post('/login', async function (req, res) {
       res.status(404).json({ status: false, message: 'Invalid username or password' });
     } else {
       const token = JwtToken.sign({ username,password }, config.SECRETKEY, { expiresIn: '1h' });
-      res.json({ status: true, message: 'Thành công', data: users, token });
+      res.json({ status: true, message: 'Thành công',  token });
     }
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
