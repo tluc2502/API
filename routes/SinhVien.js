@@ -15,7 +15,8 @@ router.get('/all', async (req, res) => {
         res.status(403).json({"status": 403, "err": err});
       }else{
         const sinhViens = await SinhVien.find();
-        res.json(sinhViens);
+  
+        res.json({ status: true, message: 'Thành công',  data: sinhViens});
       }
     });
   }else{
