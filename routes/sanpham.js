@@ -14,7 +14,7 @@ router.get('/tatcasp', async (req, res) => {
   });
   
   // Route: Thêm sản phẩm mới
-  router.post('/', async (req, res) => {
+  router.post('/themsp', async (req, res) => {
     const { masp, tensp, gia, soluong, category } = req.body;
   
     // Kiểm tra nếu các trường bắt buộc chưa có giá trị
@@ -77,15 +77,15 @@ router.delete('/:masp', async (req, res) => {
   });
   
   // Route: Tìm sản phẩm theo tên
-  router.get('/search', async (req, res) => {
-    const { tensp } = req.query;  // Lấy giá trị từ query parameter
+  router.get('/:masp', async (req, res) => {
+    const { masp } = req.params;  // Lấy giá trị từ query parameter
   
-    if (!tensp) {
+    if (!masp) {
       return res.status(400).send('Thiếu thông tin tên sản phẩm');
     }
   
     try {
-      const products = await Sanpham.find({ tensp: { $regex: tensp, $options: 'i' } })  // Tìm kiếm theo tên sản phẩm (Không phân biệt chữ hoa/thường)
+      const products = await Sanpham.find({ masp: { $regex: masp, $options: 'i' } })  // Tìm kiếm theo tên sản phẩm (Không phân biệt chữ hoa/thường)
         .populate('category', 'name');  // Populate tên danh mục
   
       if (products.length === 0) {
