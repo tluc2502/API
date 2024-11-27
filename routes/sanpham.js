@@ -6,8 +6,8 @@ const Sanpham = require('../models/sanphamModels');
 // Route: Lấy tất cả sản phẩm
 router.get('/tatcasp', async (req, res) => {
     try {
-      const products = await Sanpham.find().populate('category', 'name');  // Lấy tất cả sản phẩm và populate thông tin danh mục
-      res.status(200).json(products);  // Trả về danh sách sản phẩm
+      const sanphams = await Sanpham.find().populate('category', 'name');  // Lấy tất cả sản phẩm và populate thông tin danh mục
+      res.status(200).json(sanphams);  // Trả về danh sách sản phẩm
     } catch (err) {
       res.status(500).send('Lỗi khi lấy tất cả sản phẩm: ' + err);
     }
