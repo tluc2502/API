@@ -7,12 +7,24 @@ const NhanVien = require('../models/nhanvienmodole'); // Đảm bảo tên model
 // Route: Lấy tất cả nhân viên
 router.get('/tatcanv', async (req, res) => {
     try {
-        const nhanvien = await NhanVien.find();
-        res.json(nhanvien);
+        const token = req.header("Authorization")?.split(' ')[1]; // Lấy token từ header Authorization
+        if (token) {
+            JWT.verify(token, config.SECRETKEY, async function (err, id) {
+                if (err) {
+                    res.status(403).json({ "status": 403, "err": err });
+                } else {
+                    const nhanvien = await NhanVien.find(); // Lấy danh sách nhân viên nếu token hợp lệ
+                    res.json({ status: true, message: 'Thành công', data: nhanvien });
+                }
+            });
+        } else {
+            res.status(401).json({ "status": 401, message: "Không có token" });
+        }
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
 
 // Route: Thêm nhân viên
 router.post('/themnv', async (req, res) => {
